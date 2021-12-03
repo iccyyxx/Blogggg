@@ -1,0 +1,22 @@
+.photo {
+    margin: 0 auto;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    margin-bottom: 30px;
+}
+
+.items {
+    display: flex;
+}
+
+.items div {
+    flex: 1;
+}
+
+.items span {
+    display: block;
+    align-items: center;
+    text-align: center;
+}
