@@ -1,3 +1,11 @@
+<!-- 
+    TODO:
+    1.密码重复输入验证
+    2.密码为空判断
+    3.密码格式验证
+    4.邮箱格式验证
+    5.用户名查重
+ -->
 <!doctype html>
 <html lang="en">
 
@@ -40,7 +48,7 @@
         <div class="row mb-3">
             <label for="inputPassword3" class="col-sm-3 col-form-label">密码</label>
             <div class="col-sm-9">
-                <input type="password" class="form-control" id="inputPassword3" name="u_psw">
+                <input type="password" name="u_psw" class="form-control" id="inputPassword3">
             </div>
         </div>
         <div class="row mb-3">
@@ -63,6 +71,14 @@
         </div>
         <div class="row mb-5">
             <button type="submit" class="btn btn-primary">注册</button>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-6">
+                <a href="../php/index.php">首页</a>
+            </div>
+            <div class="col-sm-6">
+                <a href="../html/login.html">登录</a>
+            </div>
         </div>
     </form>
 </body>

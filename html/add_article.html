@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <link href="../css/signin.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <form action="../php/add_article.php" method="post">
+            <div class="mb-3">
+                <label for="b_title" class="form-label">标题</label>
+                <input name="b_title" type="text" class="form-control" id="b_title" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="b_sort" class="form-label">分类</label>
+                <input type="text" name="b_sort" class="form-control" id="b_sort" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="b_content" class="form-label">内容</label>
+                <textarea name="b_content" rows="10" class="form-control" type="password" class="form-control"
+                    id="b_content"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+</body>
+
+</html>

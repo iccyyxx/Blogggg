@@ -30,24 +30,36 @@
 </head>
 
 <body class="text-center">
-    <form class="form-signin">
+
+    <form class="form-signin" action="../php/login.php" method="post">
         <h1>登录</h1>
         <div class="row mb-3">
             <label for="inputusername" class="col-sm-3 col-form-label">用户名</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="inputusername">
+                <input type="text" class="form-control" id="inputusername" name="u_name">
             </div>
         </div>
         <div class="row mb-3">
             <label for="inputPassword3" class="col-sm-3 col-form-label">密码</label>
             <div class="col-sm-9">
-                <input type="password" class="form-control" id="inputPassword3">
+                <input type="password" class="form-control" id="inputPassword3" name="u_password">
             </div>
         </div>
         <div class="row mb-5">
             <button type="submit" class="btn btn-primary">登录</button>
         </div>
+        <div class="row mb-3">
+            <div class="col-sm-6">
+                <a href="../php/index.php">首页</a>
+            </div>
+            <div class="col-sm-6">
+                <a href="../html/register.html">注册</a>
+            </div>
+        </div>
+
     </form>
+
+
 
 </body>
 
