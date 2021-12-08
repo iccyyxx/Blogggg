@@ -1,6 +1,9 @@
 <?php
 require_once("conn.php");
 $u_name = $_POST["u_name"];
+
+
+
 $u_password = $_POST["u_password"];
 $sql_login = "SELECT * FROM `user` WHERE `u_name` ='$u_name' AND `u_password` = '$u_password'";
 $result_login = mysqli_query($conn, $sql_login);

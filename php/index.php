@@ -91,8 +91,8 @@ if (isset($_COOKIE["u_id"])) {
         <div class="card border-dark mb-3 item-show" id="<?php echo $b_id; ?>">
           <div class="card-body" onclick="show(<?php echo $b_id; ?>);">
             <h5 class="card-title"><?php echo $article["b_title"]; ?></h5>
-            <p class="card-text">
-              <?php echo $article["b_content"]; ?></p>
+            <div class="card-text" style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;">
+              <?php echo $article["b_content"]; ?></div>
           </div>
           <div class="card-footer text-muted">
             <?php echo $article["b_update_time"]; ?>
@@ -120,7 +120,6 @@ if (isset($_COOKIE["u_id"])) {
           <a onclick="reshow(<?php echo $b_id; ?>)" class=" btn btn-outline-secondary">返回</a>
           <a onclick="return isLogin()" class=" btn btn-outline-secondary">点赞</a>
           <a onclick="return isLogin()" class="btn btn-outline-secondary">评论</a>
-
         </article>
       <?php } ?>
     </div>

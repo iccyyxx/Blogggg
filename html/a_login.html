@@ -30,18 +30,18 @@
 </head>
 
 <body class="text-center">
-    <form class="form-signin">
+    <form class="form-signin" action="../php/a_login.php" method="post">
         <h1>管理员登录</h1>
         <div class="row mb-3">
             <label for="inputusername" class="col-sm-3 col-form-label">用户名</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="inputusername">
+                <input name="a_name" type="text" class="form-control" id="inputusername">
             </div>
         </div>
         <div class="row mb-3">
             <label for="inputPassword3" class="col-sm-3 col-form-label">密码</label>
             <div class="col-sm-9">
-                <input type="password" class="form-control" id="inputPassword3">
+                <input name="a_password" type="password" class="form-control" id="inputPassword3">
             </div>
         </div>
         <div class="row mb-5">

@@ -21,6 +21,7 @@ if (isset($_COOKIE["u_id"])) {
     </title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
     <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <script src="../js/jquery-3.6.0.min.js"></script>
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -74,19 +75,24 @@ if (isset($_COOKIE["u_id"])) {
     </div>
     <main>
         <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 25%;">
-            <div class="photo" style="background: url('../image/head.png') no-repeat; background-size:100% 100%">
-            </div>
-            <div class="items">
-                <div>
-                    <span>文章</span>
-                    <span>12</span>
+            <?php
+            if (isset($_COOKIE["path"])) {
+            ?>
+                <div class="photo" style="background: url('<?php echo $_COOKIE["path"] ?>') no-repeat; background-size:100% 100%">
+                <?php } else  ?>
+                <div class="photo"></div>
                 </div>
-                <div>
-                    <span>标签</span>
-                    <span>3</span>
-                </div>
+                <div class="items">
+                    <div>
+                        <span>文章</span>
+                        <span>12</span>
+                    </div>
+                    <div>
+                        <span>标签</span>
+                        <span>3</span>
+                    </div>
 
-            </div>
+                </div>
         </div>
         <div class="b-example-divider"></div>
         <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 75%;">
@@ -96,10 +102,10 @@ if (isset($_COOKIE["u_id"])) {
             while ($article = mysqli_fetch_assoc($result)) {
                 $b_id = $article["b_id"];
             ?>
-                <div class="card border-dark mb-3">
-                    <div class="card-body">
+                <div class="card border-dark mb-3 item-show" id="<?php echo $b_id; ?>">
+                    <div class="card-body" onclick="show(<?php echo $b_id; ?>);">
                         <h5 class="card-title"><?php echo $article["b_title"]; ?></h5>
-                        <p class="card-text">
+                        <p class="card-text" style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;">
                             <?php echo $article["b_content"]; ?></p>
                     </div>
                     <div class="card-footer text-muted">
@@ -110,9 +116,49 @@ if (isset($_COOKIE["u_id"])) {
                         </span>
                     </div>
                 </div>
+                <article class="blog-post visually-hidden blog-show" id="detail-<?php echo $b_id; ?>">
+                    <h2 class="blog-post-title">
+                        <?php echo $article["b_title"]; ?>
+                    </h2>
+                    <p class="blog-post-meta">
+                        <?php echo $article["b_create_time"]; ?>
+                        by <a href="#" one-link-mark="yes">
+                            <?php echo $_COOKIE["u_name"]; ?>
+                        </a>
+                    </p>
+                    <div>
+                        <?php echo $article["b_content"]; ?>
+                    </div>
+                    <p></p>
+                    <a onclick="reshow(<?php echo $b_id; ?>)" class=" btn btn-outline-secondary">返回</a>
+                    <a href="../php/mod_article.php?b_id= <?php echo $b_id; ?>" onclick="return isLogin()" class=" btn btn-outline-secondary">编辑</a>
+                    <a href="../php/delete_article.php?b_id= <?php echo $b_id; ?>" onclick="return isLogin()" class="btn btn-outline-secondary">删除</a>
+                </article>
             <?php } ?>
         </div>
     </main>
+    <script>
+        var show = function(i) {
+            console.log(i);
+            var id = "#detail-" + i;
+            $(".item-show").addClass("visually-hidden");
+            $(id).removeClass("visually-hidden");
+            console.log($(id));
+        }
+        var reshow = function(i) {
+            var id = "#detail-" + i;
+            $(".item-show").removeClass("visually-hidden");
+            $(id).addClass("visually-hidden");
+        }
+        var isLogin = function() {
+            if (!document.cookie) {
+                alert("请登录");
+                return false;
+            } else {
+                console.log(1);
+            }
+        }
+    </script>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/sidebars.js"></script>
 </body>

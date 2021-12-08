@@ -2,8 +2,9 @@
 
 
 require_once("conn.php");
-$date1 = date('Y-m-d H:i:s');
 $u_name = $_POST["u_name"];
+$date1 = date('Y-m-d H:i:s');
+
 $u_psw = $_POST["u_psw"];
 $u_repsw = $_POST["u_repsw"];
 $u_email = $_POST["u_email"];

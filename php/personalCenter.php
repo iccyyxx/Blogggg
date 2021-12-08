@@ -107,6 +107,8 @@ $u_id = $_COOKIE["u_id"];
                     echo '<script>
                     alert("修改头像失败");
                 </script>';
+                } else {
+                    setcookie("path", $filename);
                 }
             }
             // 读取个人资料
