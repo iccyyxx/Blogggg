@@ -17,7 +17,7 @@ if (isset($_COOKIE["u_id"])) {
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.88.1">
-  <title>Sidebars · Bootstrap v5.1</title>
+  <title>主页</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -40,6 +40,7 @@ if (isset($_COOKIE["u_id"])) {
   <link rel="stylesheet" href="../css/blog.css">
   <link rel="stylesheet" href="../css/index.css">
   <link href="../css/sidebars.css" rel="stylesheet">
+  <script src="../js/base.js"></script>
 </head>
 
 <body>
@@ -95,10 +96,22 @@ if (isset($_COOKIE["u_id"])) {
               <?php echo $article["b_content"]; ?></div>
           </div>
           <div class="card-footer text-muted">
-            <?php echo $article["b_update_time"]; ?>
-            by <?php echo $article["u_name"]; ?>
+            <span style="line-height:36px">
+              <?php echo $article["b_update_time"]; ?>
+              by <?php echo $article["u_name"]; ?>
+            </span>
             <span style="float:right">
-              <a onclick="return isLogin()" class=" btn btn-outline-secondary">点赞</a>
+              <a onclick="return isLogin(this)" class=" btn btn-outline-secondary" id="like-<?php echo $b_id; ?>">
+                <img id="icon-like" src="../image_1/like.png" class="img-responsive" alt="" style="height:20px">
+                <span id="likenums-<?php echo $b_id; ?>">
+                  <?php
+                  $sql_like_nums = "SELECT * FROM `likeblog` WHERE `b_id` = $b_id";
+                  $result_like_nums = mysqli_query($conn, $sql_like_nums);
+                  $like_nums = mysqli_num_rows($result_like_nums);
+                  echo $like_nums;
+                  ?>
+                </span>
+              </a>
               <a onclick="return isLogin()" class="btn btn-outline-secondary">评论</a>
             </span>
           </div>
@@ -126,28 +139,6 @@ if (isset($_COOKIE["u_id"])) {
 
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/sidebars.js"></script>
-    <script>
-      var show = function(i) {
-        console.log(i);
-        var id = "#detail-" + i;
-        $(".item-show").addClass("visually-hidden");
-        $(id).removeClass("visually-hidden");
-        console.log($(id));
-      }
-      var reshow = function(i) {
-        var id = "#detail-" + i;
-        $(".item-show").removeClass("visually-hidden");
-        $(id).addClass("visually-hidden");
-      }
-      var isLogin = function() {
-        if (!document.cookie) {
-          alert("请登录");
-          return false;
-        } else {
-          console.log(1);
-        }
-      }
-    </script>
 </body>
 
 </html>

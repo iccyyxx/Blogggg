@@ -86,6 +86,44 @@
             </div>
         </div>
     </form>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /* 用户文章数量显示 */
+
+            /* 注册模块 */
+            // 登录检查用户名是否重复
+            $("#u_name").blur(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: "../php/checkName.php",
+                    data: { "u_name": $(this).val() },
+                    success: function (result) {
+                        $("#u_nameHint").html(result);
+                    }
+                });
+            })
+            // 检验密码格式
+            $('#u_psw').blur(function () {
+                var reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
+                if (!reg.test($(this).val())) {
+                    $("#u_pswHint").html("密码至少6位，包含数字，大写字母和小写字母");
+                }
+                else {
+                    $("#u_pswHint").html("");
+                }
+            })
+            // 确认密码
+            $('#u_repsw').blur(function () {
+                if ($(this).val() != $("#u_psw").val()) {
+                    $("#u_repswHint").html("输入的两次密码不一致,请重新输入");
+                }
+                else {
+                    $("#u_repswHint").html("");
+                }
+            })
+        })
+    </script>
 </body>
+
 
 </html>

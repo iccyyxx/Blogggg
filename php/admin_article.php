@@ -39,6 +39,7 @@ if (isset($_COOKIE["u_id"])) {
     </style>
     <link rel="stylesheet" href="../css/index.css">
     <link href="../css/sidebars.css" rel="stylesheet">
+    <script src="../js/base.js"></script>
 </head>
 
 <body>
@@ -79,86 +80,71 @@ if (isset($_COOKIE["u_id"])) {
             if (isset($_COOKIE["path"])) {
             ?>
                 <div class="photo" style="background: url('<?php echo $_COOKIE["path"] ?>') no-repeat; background-size:100% 100%">
-                <?php } else  ?>
-                <div class="photo"></div>
-                </div>
-                <div class="items">
-                    <div>
-                        <span>文章</span>
-                        <span>12</span>
+                <?php } else { ?>
+                    <div class="photo">
+                    <?php } ?>
                     </div>
-                    <div>
-                        <span>标签</span>
-                        <span>3</span>
-                    </div>
+                    <div class="items">
+                        <div>
+                            <span>文章</span>
+                            <span id="blogNum">
+                                <?php
+                                $sql1 = "Select * from blog where u_id=$u_id";
+                                $result = mysqli_num_rows(mysqli_query($conn, $sql1));
+                                echo $result;
+                                ?>
+                            </span>
+                        </div>
+                        <div>
+                            <span>标签</span>
+                            <span>3</span>
+                        </div>
 
-                </div>
-        </div>
-        <div class="b-example-divider"></div>
-        <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 75%;">
-            <?php
-            $sql1 = "Select * from blog where u_id=$u_id";
-            $result = mysqli_query($conn, $sql1);
-            while ($article = mysqli_fetch_assoc($result)) {
-                $b_id = $article["b_id"];
-            ?>
-                <div class="card border-dark mb-3 item-show" id="<?php echo $b_id; ?>">
-                    <div class="card-body" onclick="show(<?php echo $b_id; ?>);">
-                        <h5 class="card-title"><?php echo $article["b_title"]; ?></h5>
-                        <p class="card-text" style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;">
-                            <?php echo $article["b_content"]; ?></p>
-                    </div>
-                    <div class="card-footer text-muted">
-                        <?php echo $article["b_update_time"]; ?>
-                        <span style="float:right">
-                            <a href="../php/mod_article.php?b_id= <?php echo $b_id; ?>" class=" btn btn-outline-secondary">编辑</a>
-                            <a href="../php/delete_article.php?b_id= <?php echo $b_id; ?>" class="btn btn-outline-secondary">删除</a>
-                        </span>
                     </div>
                 </div>
-                <article class="blog-post visually-hidden blog-show" id="detail-<?php echo $b_id; ?>">
-                    <h2 class="blog-post-title">
-                        <?php echo $article["b_title"]; ?>
-                    </h2>
-                    <p class="blog-post-meta">
-                        <?php echo $article["b_create_time"]; ?>
-                        by <a href="#" one-link-mark="yes">
-                            <?php echo $_COOKIE["u_name"]; ?>
-                        </a>
-                    </p>
-                    <div>
-                        <?php echo $article["b_content"]; ?>
-                    </div>
-                    <p></p>
-                    <a onclick="reshow(<?php echo $b_id; ?>)" class=" btn btn-outline-secondary">返回</a>
-                    <a href="../php/mod_article.php?b_id= <?php echo $b_id; ?>" onclick="return isLogin()" class=" btn btn-outline-secondary">编辑</a>
-                    <a href="../php/delete_article.php?b_id= <?php echo $b_id; ?>" onclick="return isLogin()" class="btn btn-outline-secondary">删除</a>
-                </article>
-            <?php } ?>
-        </div>
+                <div class="b-example-divider"></div>
+                <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 75%;">
+                    <?php
+                    $sql1 = "Select * from blog where u_id=$u_id";
+                    $result = mysqli_query($conn, $sql1);
+                    while ($article = mysqli_fetch_assoc($result)) {
+                        $b_id = $article["b_id"];
+                    ?>
+                        <div class="card border-dark mb-3 item-show" id="<?php echo $b_id; ?>">
+                            <div class="card-body" onclick="show(<?php echo $b_id; ?>);">
+                                <h5 class="card-title"><?php echo $article["b_title"]; ?></h5>
+                                <p class="card-text" style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;">
+                                    <?php echo $article["b_content"]; ?></p>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <?php echo $article["b_update_time"]; ?>
+                                <span style="float:right">
+                                    <a href="../php/mod_article.php?b_id= <?php echo $b_id; ?>" class=" btn btn-outline-secondary">编辑</a>
+                                    <a href="../php/delete_article.php?b_id= <?php echo $b_id; ?>" class="btn btn-outline-secondary">删除</a>
+                                </span>
+                            </div>
+                        </div>
+                        <article class="blog-post visually-hidden blog-show" id="detail-<?php echo $b_id; ?>">
+                            <h2 class="blog-post-title">
+                                <?php echo $article["b_title"]; ?>
+                            </h2>
+                            <p class="blog-post-meta">
+                                <?php echo $article["b_create_time"]; ?>
+                                by <a href="#" one-link-mark="yes">
+                                    <?php echo $_COOKIE["u_name"]; ?>
+                                </a>
+                            </p>
+                            <div>
+                                <?php echo $article["b_content"]; ?>
+                            </div>
+                            <p></p>
+                            <a onclick="reshow(<?php echo $b_id; ?>)" class=" btn btn-outline-secondary">返回</a>
+                            <a href="../php/mod_article.php?b_id= <?php echo $b_id; ?>" onclick="return isLogin()" class=" btn btn-outline-secondary">编辑</a>
+                            <a href="../php/delete_article.php?b_id= <?php echo $b_id; ?>" onclick="return isLogin()" class="btn btn-outline-secondary">删除</a>
+                        </article>
+                    <?php } ?>
+                </div>
     </main>
-    <script>
-        var show = function(i) {
-            console.log(i);
-            var id = "#detail-" + i;
-            $(".item-show").addClass("visually-hidden");
-            $(id).removeClass("visually-hidden");
-            console.log($(id));
-        }
-        var reshow = function(i) {
-            var id = "#detail-" + i;
-            $(".item-show").removeClass("visually-hidden");
-            $(id).addClass("visually-hidden");
-        }
-        var isLogin = function() {
-            if (!document.cookie) {
-                alert("请登录");
-                return false;
-            } else {
-                console.log(1);
-            }
-        }
-    </script>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/sidebars.js"></script>
 </body>
